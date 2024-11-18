@@ -8,9 +8,8 @@ const YAML = require('yamljs');
 
 const swaggerDocument = YAML.load('./docs/auth.yaml'); // O caminho para o seu arquivo YAML
 
-
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 connectDB();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -37,7 +36,6 @@ const authRoute = require("./routers/auth");
 const commentsRoute = require("./routers/comments");
 
 
-
 app.use("/", landingpageRoute);
 // app.use("/columns", columnsRoute);
 app.use("/projects", projectsRoute);
@@ -53,8 +51,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).json({ success: false, statusCode, message });
 });
 
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
